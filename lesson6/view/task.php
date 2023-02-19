@@ -23,7 +23,7 @@
         <input type="text" id="description" name="description">
         <input type="submit" value="Добавить">
     </form>
-    <a href="/?action=logout">Выйти</a>
+    <a href="/?controller=security&action=logout">Выйти</a>
 
 </body>
 

@@ -3,7 +3,13 @@
 require_once 'model/UserProvider.php';
 require_once 'model/User.php';
 
-
+if (isset($_GET['action']) && $_GET['action'] === 'logout') {
+    unset($_SESSION['user']);
+    unset($_SESSION['tasks']);
+    setcookie('username', '', time() - 3600);
+    header("Location: index.php");
+    die();
+}
 $error = null;
 if (isset($_POST['username'], $_POST['password'])) {
     ['username' => $username, 'password' => $password] = $_POST;

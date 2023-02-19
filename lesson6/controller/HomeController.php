@@ -3,10 +3,7 @@
 require_once 'model/User.php';
 $pageHeader = 'Добро пожаловать';
 $user = null;
-if (isset($_GET['action']) && $_GET['action'] === 'logout') {
-    unset($_SESSION['user']);
-    setcookie('username', '', time() - 3600);
-} elseif (isset($_GET['action']) && $_GET['action'] === 'task') {
+if (isset($_GET['action']) && $_GET['action'] === 'task') {
     header('Location: /?controller=task');
     exit;
 } else {
