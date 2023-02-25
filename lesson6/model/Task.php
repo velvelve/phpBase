@@ -1,6 +1,8 @@
 <?php
 class Task
 {
+    private int $id;
+    private int $userId;
     private bool $isDone;
     private string $description;
 
@@ -28,5 +30,23 @@ class Task
     public function setDescription($description)
     {
         $this->description = $description;
+    }
+
+    public function setId($id)
+    {
+        $this->id = $id;
+    }
+    public function setUserId($userId)
+    {
+        $this->userId = $userId;
+    }
+
+    public function getId()
+    {
+        return $this->id;
+    }
+    public function getUserId()
+    {
+        return $this->userId;
     }
 }

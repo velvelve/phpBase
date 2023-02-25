@@ -1,26 +1,28 @@
 <?php
 
 require_once 'model/TaskProvider.php';
+require_once 'model/User.php';
+$pdo = require 'db.php';
+$taskProvider = new TaskProvider($pdo);
 
 if (!isset($_SESSION['user'])) {
     header('Location: /?controller=security');
     exit();
 }
 
-if (isset($_GET['action']) && $_GET['action'] === 'execute') {
-    $index = $_GET['index'];
-    TaskProvider::markAsDone($index);
-}
-
 $user = unserialize($_SESSION['user']);
+
+if (isset($_GET['action']) && $_GET['action'] === 'execute') {
+    $taskProvider->markAsDone($user->getUserId());
+}
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (isset($_POST['description']) && !empty(trim($_POST['description']))) {
         $description = trim($_POST['description']);
-        TaskProvider::addTask($description);
+        $taskProvider->addTask($user->getUserId(), $description);
     }
 }
 
-$tasks = TaskProvider::getUndoneList();
+$tasks = $taskProvider->getUndoneListFromDb($user->getUserId());
 
 require_once 'view/task.php';

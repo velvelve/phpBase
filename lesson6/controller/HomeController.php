@@ -1,6 +1,7 @@
 <?php
 
-require_once 'model/User.php';
+require_once 'fixture.php';
+
 $pageHeader = 'Добро пожаловать';
 $user = null;
 if (isset($_GET['action']) && $_GET['action'] === 'task') {
